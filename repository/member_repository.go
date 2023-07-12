@@ -18,18 +18,16 @@ func (mr *MemberRepository) CreateMember(m model.Member) error {
 	return mr.db.Create(&m).Error
 }
 
-func (mr *MemberRepository) ShowMember(id string) (model.Member, error) {
+func (mr *MemberRepository) ShowMember(id uint) (model.Member, error) {
 	var m model.Member
 	err := mr.db.Where("id = ?", id).First(&m).Error
 	return m, err
 }
 
-func (mr *MemberRepository) DeleteMember(id string) error {
+func (mr *MemberRepository) DeleteMember(id uint) error {
 	return mr.db.Delete(&model.Member{}, id).Error
 }
 
-func (mr *MemberRepository) UpdateMember(id string, m model.Member) error {
+func (mr *MemberRepository) UpdateMember(id uint, m model.Member) error {
 	return mr.db.Model(&model.Member{}).Where("id = ?", id).Updates(m).Error
 }
-
-

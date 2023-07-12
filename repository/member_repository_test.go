@@ -70,6 +70,9 @@ func TestRepositoryShowUser(t *testing.T) {
 	defer cleanup()
 	// expect member
 	expectMember := model.Member{
+		Model: gorm.Model{
+			ID: 1,
+		},
 		Name: "test",
 	}
 	// create test user
@@ -78,7 +81,7 @@ func TestRepositoryShowUser(t *testing.T) {
 		t.Errorf("fail to create user: %v", err)
 	}
 	// get test user
-	result, err := repo.ShowMember("1")
+	result, err := repo.ShowMember(expectMember.ID)
 	if err != nil {
 		t.Errorf("fail to get user: %v", err)
 	}
@@ -93,6 +96,9 @@ func TestRepositoryDeleteUser(t *testing.T) {
 	defer cleanup()
 	// expect member
 	expectMember := model.Member{
+		Model: gorm.Model{
+			ID: 1,
+		},
 		Name: "test",
 	}
 	// create test user
@@ -101,7 +107,7 @@ func TestRepositoryDeleteUser(t *testing.T) {
 		t.Errorf("fail to create user: %v", err)
 	}
 	// delete test user
-	err = repo.DeleteMember("1")
+	err = repo.DeleteMember(expectMember.ID)
 	if err != nil {	
 		t.Errorf("fail to delete user: %v", err)
 	}
@@ -112,6 +118,9 @@ func TestRepositoryUpdateUser(t *testing.T) {
 	defer cleanup()
 	// before update member
 	beforeMember := model.Member{
+		Model: gorm.Model{
+			ID: 1,
+		},
 		Name: "test",
 	}
 	// after update member
@@ -124,12 +133,12 @@ func TestRepositoryUpdateUser(t *testing.T) {
 		t.Errorf("fail to create user: %v", err)
 	}
 	// update test user
-	err = repo.UpdateMember("1", afterMember)
+	err = repo.UpdateMember(beforeMember.ID, afterMember)
 	if err != nil {
 		t.Errorf("fail to update user: %v", err)
 	}
 	// get test user
-	result, err := repo.ShowMember("1")
+	result, err := repo.ShowMember(beforeMember.ID)
 	if err != nil {
 		t.Errorf("fail to get user: %v", err)
 	}

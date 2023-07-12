@@ -8,7 +8,7 @@ import (
 
 type UseCase interface {
 	CreateMember(c *gin.Context, m model.Member) error
-	ShowMember(c *gin.Context, id string) (model.Member, error)
-	DeleteMember(c *gin.Context, id string) error
-	UpdateMember(c *gin.Context, id string, m model.Member) error
+	ShowMember(c *gin.Context, id uint) (model.Member, error)
+	DeleteMember(c *gin.Context, id uint) error
+	UpdateMember(c *gin.Context, id uint, m model.Member) error
 }
