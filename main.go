@@ -12,7 +12,7 @@ import (
 func main() {
 	r := gin.Default()
 
-	const dns = "hello"
+	const dns = "n000r111:password@tcp(localhost:3306)/go_practice_server?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := database.NewMySql(dns)
 	if err != nil {
 		panic(err)
@@ -22,6 +22,9 @@ func main() {
 	handler := handler.NewMemberHandler(usecase)
 
 	r.POST("/member", handler.CreateMember)
+	r.GET("/member/:id", handler.ShowMember)
+	r.DELETE("/member/:id", handler.DeleteMember)
+	r.PUT("/member/:id", handler.UpdateMember)
 
 	r.Run()
 }
