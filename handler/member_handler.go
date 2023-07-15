@@ -22,7 +22,6 @@ func getUintId(c *gin.Context) (uint, error) {
 	fmt.Print(idStr)
 	id, err := strconv.ParseUint(idStr, 10, 32)
 	if err != nil {
-		panic(err)
 		return 0, err
 	}
 	return uint(id), nil
